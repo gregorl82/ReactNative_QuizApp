@@ -8,7 +8,17 @@ import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 export default function App() {
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [categories] = useState<string[]>([
+    "Music",
+    "Arts",
+    "Literature",
+    "Movies",
+  ]);
+  const [selectedCategory, setSelectedCategory] = useState<string | number>("");
+  const [numberOfQuestions, setNumberOfQuestions] = useState<string | number>(
+    "0"
+  );
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -16,23 +26,45 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>Qwizzr</Text>
+        <View style={styles.pickerContainer}>
+          <Text style={styles.labelText}>Category:</Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={selectedCategory}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedCategory(itemValue)
+            }
+          >
+            <Picker.Item key={0} label={""} value={""} />
+            {categories.map((category, index) => {
+              return (
+                <Picker.Item
+                  key={index + 1}
+                  label={category}
+                  value={category}
+                />
+              );
+            })}
+          </Picker>
+        </View>
 
-        <Text style={styles.labelText}>Category:</Text>
-        <Picker style={styles.picker}>
-          <Picker.Item label="Category 1" value="Category1" />
-          <Picker.Item label="Category 2" value="Category2" />
-        </Picker>
-
-        <Text style={styles.labelText}>Number of questions:</Text>
-        <Picker style={styles.picker}>
-          <Picker.Item label="5" value="5" />
-          <Picker.Item label="10" value="10" />
-        </Picker>
+        <View style={styles.pickerContainer}>
+          <Text style={styles.labelText}>Questions:</Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={numberOfQuestions}
+            onValueChange={(itemValue, itemIndex) =>
+              setNumberOfQuestions(itemValue)
+            }
+          >
+            <Picker.Item label="5" value="5" />
+            <Picker.Item label="10" value="10" />
+          </Picker>
+        </View>
 
         <TouchableOpacity onPress={() => setShowMessage(true)}>
           <Text style={styles.button}>START</Text>
         </TouchableOpacity>
-
         {showMessage && (
           <>
             <Text>Lets go!</Text>
@@ -41,7 +73,6 @@ export default function App() {
             </TouchableOpacity>
           </>
         )}
-        <StatusBar style="auto" />
       </View>
     );
   }
@@ -53,6 +84,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffe6f4",
     alignItems: "center",
     justifyContent: "center",
+  },
+  pickerContainer: {
+    alignItems: "baseline",
   },
   titleText: {
     fontFamily: "FugazOne_400Regular",
