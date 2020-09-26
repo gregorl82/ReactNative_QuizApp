@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 15,
     backgroundColor: "#488687",
-    color: "white",
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 15,
     borderRadius: 5,
