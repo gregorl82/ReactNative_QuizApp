@@ -9,10 +9,9 @@ interface Category {
   name: string;
 }
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }: any) => {
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
-  const [showMessage, setShowMessage] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>();
   const [selectedCategory, setSelectedCategory] = useState<string | number>("");
   const [numberOfQuestions, setNumberOfQuestions] = useState<string | number>(
@@ -87,17 +86,9 @@ export const HomeScreen = () => {
           </Picker>
         </View>
 
-        <TouchableOpacity onPress={() => setShowMessage(true)}>
+        <TouchableOpacity onPress={() => navigation.navigate("Questions")}>
           <Text style={styles.button}>START</Text>
         </TouchableOpacity>
-        {showMessage && (
-          <>
-            <Text>Lets go!</Text>
-            <TouchableOpacity onPress={() => setShowMessage(false)}>
-              <Text style={styles.button}>RESET</Text>
-            </TouchableOpacity>
-          </>
-        )}
       </View>
     );
   }
