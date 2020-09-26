@@ -1,24 +1,47 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppLoading } from "expo";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 
+interface Category {
+  id: string;
+  name: string;
+}
+
 export default function App() {
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
   const [showMessage, setShowMessage] = useState<boolean>(false);
-  const [categories] = useState<string[]>([
-    "Music",
-    "Arts",
-    "Literature",
-    "Movies",
-  ]);
+  const [categories, setCategories] = useState<Category[]>();
   const [selectedCategory, setSelectedCategory] = useState<string | number>("");
   const [numberOfQuestions, setNumberOfQuestions] = useState<string | number>(
     "0"
   );
+
+  useEffect(() => {
+    fetch("https://opentdb.com/api_category.php")
+      .then((res) => res.json())
+      .then((data) => {
+        const categories = data.trivia_categories;
+        const sortedCategories = categories.sort((a: any, b: any) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase();
+
+          if (nameA < nameB) {
+            return -1;
+          }
+
+          if (nameA > nameB) {
+            return 1;
+          }
+
+          return 0;
+        });
+
+        setCategories(sortedCategories);
+      });
+  }, []);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -36,15 +59,16 @@ export default function App() {
             }
           >
             <Picker.Item key={0} label={""} value={""} />
-            {categories.map((category, index) => {
-              return (
-                <Picker.Item
-                  key={index + 1}
-                  label={category}
-                  value={category}
-                />
-              );
-            })}
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <Picker.Item
+                    key={category.id}
+                    label={category.name}
+                    value={category.id}
+                  />
+                );
+              })}
           </Picker>
         </View>
 
@@ -59,6 +83,7 @@ export default function App() {
           >
             <Picker.Item label="5" value="5" />
             <Picker.Item label="10" value="10" />
+            <Picker.Item label="15" value="15" />
           </Picker>
         </View>
 
