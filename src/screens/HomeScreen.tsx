@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { AppLoading } from "expo";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { Button } from "../components/Button";
 import { Picker } from "@react-native-community/picker";
+import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 
 interface Category {
@@ -9,7 +11,7 @@ interface Category {
   name: string;
 }
 
-export const HomeScreen = ({ navigation }: any) => {
+export const HomeScreen = () => {
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
   const [categories, setCategories] = useState<Category[]>();
@@ -17,6 +19,8 @@ export const HomeScreen = ({ navigation }: any) => {
   const [numberOfQuestions, setNumberOfQuestions] = useState<string | number>(
     "0"
   );
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetch("https://opentdb.com/api_category.php")
@@ -86,9 +90,10 @@ export const HomeScreen = ({ navigation }: any) => {
           </Picker>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("Questions")}>
-          <Text style={styles.button}>START</Text>
-        </TouchableOpacity>
+        <Button
+          buttonText="start"
+          onPress={() => navigation.navigate("Questions")}
+        />
       </View>
     );
   }
@@ -121,15 +126,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: "#fff",
     fontFamily: "Roboto",
-  },
-  button: {
-    padding: 15,
-    backgroundColor: "#488687",
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 15,
-    borderRadius: 5,
-    width: 100,
-    textAlign: "center",
   },
 });

@@ -1,9 +1,13 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+import { Button } from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";
 
-export const ScoreScreen = ({ navigation }: any) => {
+export const ScoreScreen = () => {
+  const navigation = useNavigation();
+
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
   if (!fontsLoaded) {
@@ -12,9 +16,10 @@ export const ScoreScreen = ({ navigation }: any) => {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Score screen!</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Text style={styles.button}>FINISH</Text>
-        </TouchableOpacity>
+        <Button
+          buttonText="reset"
+          onPress={() => navigation.navigate("Home")}
+        />
       </View>
     );
   }
@@ -29,15 +34,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "FugazOne_400Regular",
-  },
-  button: {
-    padding: 15,
-    backgroundColor: "#488687",
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 15,
-    borderRadius: 5,
-    width: 100,
-    textAlign: "center",
   },
 });

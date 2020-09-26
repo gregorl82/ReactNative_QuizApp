@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HomeScreen } from "./screens/HomeScreen";
-import { QuestionScreen } from "./screens/QuestionScreen";
-import { ScoreScreen } from "./screens/ScoreScreen";
+import { HomeScreen } from "./src/screens/HomeScreen";
+import { QuestionScreen } from "./src/screens/QuestionScreen";
+import { ScoreScreen } from "./src/screens/ScoreScreen";
 
 export default function App() {
   const Stack = createStackNavigator();
