@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AppLoading } from "expo";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import { Button } from "../components/Button";
 import { Picker } from "@react-native-community/picker";
 import { useNavigation } from "@react-navigation/native";
@@ -115,16 +115,16 @@ const styles = StyleSheet.create({
     padding: 50,
   },
   labelText: {
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica",
     padding: 5,
     fontSize: 20,
     fontWeight: "bold",
   },
   picker: {
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica",
     height: 50,
     width: 200,
     marginBottom: 20,
     backgroundColor: "#fff",
-    fontFamily: "Roboto",
   },
 });
