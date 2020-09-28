@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button } from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
@@ -6,6 +6,18 @@ import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";
 
 export const QuestionScreen = () => {
+  const [questions, setQuestions] = useState();
+
+  useEffect(() => {
+    fetch(
+      `https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple`
+    )
+      .then((res) => res.json())
+      .then((data) => setQuestions(data.results));
+
+    console.log(questions);
+  }, []);
+
   const navigation = useNavigation();
 
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
