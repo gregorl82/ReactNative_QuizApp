@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 
 interface ButtonProps {
   buttonText: string;
@@ -9,9 +9,9 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({ buttonText, onPress }) => {
   return (
     <View>
-      <TouchableOpacity onPress={onPress}>
+      <Pressable onPress={onPress}>
         <Text style={styles.button}>{buttonText.toUpperCase()}</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
