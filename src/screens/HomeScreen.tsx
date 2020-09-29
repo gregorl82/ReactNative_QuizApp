@@ -52,47 +52,10 @@ export const HomeScreen = () => {
     return (
       <View style={styles.container}>
         <Text style={styles.titleText}>Qwizzr</Text>
-        <View style={styles.pickerContainer}>
-          <Text style={styles.labelText}>Category:</Text>
-          <Picker
-            style={styles.picker}
-            selectedValue={selectedCategory}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedCategory(itemValue)
-            }
-          >
-            <Picker.Item key={0} label={""} value={""} />
-            {categories &&
-              categories.map((category) => {
-                return (
-                  <Picker.Item
-                    key={category.id}
-                    label={category.name}
-                    value={category.id}
-                  />
-                );
-              })}
-          </Picker>
-        </View>
-
-        <View style={styles.pickerContainer}>
-          <Text style={styles.labelText}>Questions:</Text>
-          <Picker
-            style={styles.picker}
-            selectedValue={numberOfQuestions}
-            onValueChange={(itemValue, itemIndex) =>
-              setNumberOfQuestions(itemValue)
-            }
-          >
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="10" value="10" />
-            <Picker.Item label="15" value="15" />
-          </Picker>
-        </View>
 
         <Button
           buttonText="start"
-          onPress={() => navigation.navigate("Questions")}
+          onPress={() => navigation.navigate("Game")}
         />
       </View>
     );

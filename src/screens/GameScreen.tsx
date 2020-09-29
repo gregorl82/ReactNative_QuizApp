@@ -5,13 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";
 
-export const QuestionScreen = () => {
+export const GameScreen = () => {
   const [questions, setQuestions] = useState();
 
   useEffect(() => {
-    fetch(
-      `https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple`
-    )
+    fetch(`https://opentdb.com/api.php?amount=10&type=multiple`)
       .then((res) => res.json())
       .then((data) => setQuestions(data.results));
 
