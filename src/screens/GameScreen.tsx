@@ -39,8 +39,6 @@ export const GameScreen = () => {
 
         setQuestions(formattedQuestions);
       });
-
-    console.log(questions);
   }, []);
 
   const navigation = useNavigation();
