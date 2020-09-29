@@ -14,37 +14,7 @@ interface Category {
 export const HomeScreen = () => {
   let [fontsLoaded] = useFonts({ FugazOne_400Regular });
 
-  const [categories, setCategories] = useState<Category[]>();
-  const [selectedCategory, setSelectedCategory] = useState<string | number>("");
-  const [numberOfQuestions, setNumberOfQuestions] = useState<string | number>(
-    "0"
-  );
-
   const navigation = useNavigation();
-
-  useEffect(() => {
-    fetch("https://opentdb.com/api_category.php")
-      .then((res) => res.json())
-      .then((data) => {
-        const categories = data.trivia_categories;
-        const sortedCategories = categories.sort((a: any, b: any) => {
-          const nameA = a.name.toUpperCase();
-          const nameB = b.name.toUpperCase();
-
-          if (nameA < nameB) {
-            return -1;
-          }
-
-          if (nameA > nameB) {
-            return 1;
-          }
-
-          return 0;
-        });
-
-        setCategories(sortedCategories);
-      });
-  }, []);
 
   if (!fontsLoaded) {
     return <AppLoading />;
