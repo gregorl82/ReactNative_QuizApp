@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
+import HTML from "react-native-render-html";
 import { QuestionWithAnswers } from "../screens/GameScreen";
 
 export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
@@ -7,11 +8,11 @@ export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
 }) => {
   return (
     <View>
-      <Text>{question.question}</Text>
-      <Text>{question.correctAnswer}</Text>
-      <Text>{question.incorrectAnswers[0]}</Text>
-      <Text>{question.incorrectAnswers[1]}</Text>
-      <Text>{question.incorrectAnswers[2]}</Text>
+      <HTML html={question.question} />
+      <HTML html={question.correctAnswer} />
+      <HTML html={question.incorrectAnswers[0]} />
+      <HTML html={question.incorrectAnswers[1]} />
+      <HTML html={question.incorrectAnswers[2]} />
     </View>
   );
 };
