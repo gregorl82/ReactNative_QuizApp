@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import HTML from "react-native-render-html";
+import { QuestionDisplay } from "./QuestionDisplay";
+import { AnswerDisplay } from "./AnswerDisplay";
 import { QuestionWithAnswers } from "../screens/GameScreen";
 
 const insert = (arr: string[], index: number, newItem: string) => [
@@ -22,9 +23,9 @@ export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
 
   return (
     <View>
-      <HTML html={question.question} />
-      {answers.map((answer) => {
-        return <HTML html={answer} />;
+      <QuestionDisplay questionText={question.question} />
+      {answers.map((answer, index) => {
+        return <AnswerDisplay key={index} answerText={answer} />;
       })}
     </View>
   );
