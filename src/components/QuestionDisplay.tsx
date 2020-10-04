@@ -11,7 +11,11 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 }) => {
   return (
     <View>
-      <HTML containerStyle={styles.questionDisplay} html={questionText} />
+      <HTML
+        containerStyle={styles.questionDisplay}
+        baseFontStyle={styles.text}
+        html={questionText}
+      />
     </View>
   );
 };
@@ -23,5 +27,8 @@ const styles = StyleSheet.create({
     margin: 20,
     padding: 10,
     borderRadius: 10,
+  },
+  text: {
+    fontSize: 20,
   },
 });

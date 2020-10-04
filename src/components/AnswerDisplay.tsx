@@ -9,14 +9,18 @@ export interface AnswerDisplayProps {
 export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
   return (
     <View>
-      <HTML containerStyle={styles.answerDisplay} html={answerText} />
+      <HTML
+        baseFontStyle={styles.text}
+        containerStyle={styles.answerDisplay}
+        html={answerText}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   answerDisplay: {
-    height: 45,
+    height: 50,
     width: 400,
     marginLeft: 20,
     marginRight: 20,
@@ -24,5 +28,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 10,
     padding: 10,
+  },
+  text: {
+    fontSize: 18,
   },
 });

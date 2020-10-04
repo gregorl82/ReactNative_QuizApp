@@ -16,7 +16,7 @@ export const HomeScreen = () => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}>Qwizzr</Text>
+        <Text style={styles.titleText}>Qwizzr!</Text>
 
         <Button
           buttonText="start"
