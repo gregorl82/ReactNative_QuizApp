@@ -1,19 +1,20 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import HTML from "react-native-render-html";
+import { StyleSheet, View, Text } from "react-native";
+
+const Entities = require("html-entities").AllHtmlEntities;
 
 export interface AnswerDisplayProps {
   answerText: string;
 }
 
 export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
+  const entities = new Entities();
+
   return (
-    <View testID="answer-display">
-      <HTML
-        baseFontStyle={styles.text}
-        containerStyle={styles.answerDisplay}
-        html={answerText}
-      />
+    <View style={styles.answerDisplay}>
+      <Text style={styles.text} adjustsFontSizeToFit={true}>
+        {entities.decode(answerText)}
+      </Text>
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import HTML from "react-native-render-html";
+import { StyleSheet, View, Text } from "react-native";
+
+const Entities = require("html-entities").AllHtmlEntities;
 
 export interface QuestionDisplayProps {
   questionText: string;
@@ -9,13 +10,11 @@ export interface QuestionDisplayProps {
 export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   questionText,
 }) => {
+  const entities = new Entities();
+
   return (
-    <View>
-      <HTML
-        containerStyle={styles.questionDisplay}
-        baseFontStyle={styles.text}
-        html={questionText}
-      />
+    <View style={styles.questionDisplay}>
+      <Text style={styles.text}>{entities.decode(questionText)}</Text>
     </View>
   );
 };
