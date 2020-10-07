@@ -8,7 +8,7 @@ export interface AnswerDisplayProps {
 
 export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
   return (
-    <View>
+    <View testID="answer-display">
       <HTML
         baseFontStyle={styles.text}
         containerStyle={styles.answerDisplay}

@@ -22,7 +22,7 @@ export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
   );
 
   return (
-    <View>
+    <View testID="question">
       <QuestionDisplay questionText={question.question} />
       {answers.map((answer, index) => {
         return <AnswerDisplay key={index} answerText={answer} />;
