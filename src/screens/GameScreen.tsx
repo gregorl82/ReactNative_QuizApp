@@ -79,7 +79,9 @@ export const GameScreen = () => {
         ) : (
           <Button
             buttonText="finish"
-            onPress={() => navigation.navigate("Score")}
+            onPress={() =>
+              navigation.navigate("Score", { correctAnswers: score })
+            }
           />
         )}
         <Button buttonText="quit" onPress={() => navigation.navigate("Home")} />
