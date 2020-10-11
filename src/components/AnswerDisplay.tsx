@@ -1,18 +1,29 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
+import { color } from "react-native-reanimated";
 
 const Entities = require("html-entities").AllHtmlEntities;
 
 export interface AnswerDisplayProps {
   answerText: string;
+  answered: boolean;
+  handlePress: (text: string) => void;
 }
 
-export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
+export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
+  answerText,
+  answered,
+  handlePress,
+}) => {
   const entities = new Entities();
 
   return (
     <View style={styles.answerDisplay}>
-      <TouchableOpacity onPress={() => console.log("Pressed!")}>
+      <Pressable
+        onPress={() => handlePress(answerText)}
+        android_ripple={{ color: "f5d0dc", radius: 300 }}
+        disabled={answered}
+      >
         <Text
           testID={"answer-display"}
           style={styles.text}
@@ -20,7 +31,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
         >
           {entities.decode(answerText)}
         </Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

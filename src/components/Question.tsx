@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { GestureResponderEvent, View } from "react-native";
 import { QuestionDisplay } from "./QuestionDisplay";
 import { AnswerDisplay } from "./AnswerDisplay";
 import { QuestionWithAnswers } from "../screens/GameScreen";
@@ -10,8 +10,14 @@ const insert = (arr: string[], index: number, newItem: string) => [
   ...arr.slice(index),
 ];
 
-export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
+interface QuestionProps {
+  question: QuestionWithAnswers;
+  handlePress: (text: string) => void;
+}
+
+export const Question: React.FC<QuestionProps> = ({
   question,
+  handlePress,
 }) => {
   const correctAnswerPosition = Math.floor(Math.random() * 4);
 
@@ -25,7 +31,14 @@ export const Question: React.FC<{ question: QuestionWithAnswers }> = ({
     <View>
       <QuestionDisplay questionText={question.question} />
       {answers.map((answer, index) => {
-        return <AnswerDisplay key={index} answerText={answer} />;
+        return (
+          <AnswerDisplay
+            key={index}
+            answerText={answer}
+            handlePress={handlePress}
+            answered={question.answered}
+          />
+        );
       })}
     </View>
   );
