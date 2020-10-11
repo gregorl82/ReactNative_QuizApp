@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AppLoading } from "expo";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import { Button } from "../components/Button";
-import { Picker } from "@react-native-community/picker";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 

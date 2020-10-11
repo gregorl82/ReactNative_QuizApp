@@ -50,7 +50,7 @@ export const GameScreen = () => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Question screen!</Text>
+        <Text style={styles.text}>Question {currentQuestionIndex + 1}</Text>
         {questions && <Question question={questions[currentQuestionIndex]} />}
         {questions && currentQuestionIndex < questions.length - 1 ? (
           <Button
@@ -77,6 +77,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
+    marginLeft: 20,
+    alignSelf: "flex-start",
     fontFamily: "FugazOne_400Regular",
+    fontSize: 20,
   },
 });

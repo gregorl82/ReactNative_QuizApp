@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 const Entities = require("html-entities").AllHtmlEntities;
 
@@ -12,9 +12,15 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
 
   return (
     <View style={styles.answerDisplay}>
-      <Text testID={"answer-display"} style={styles.text} adjustsFontSizeToFit={true}>
-        {entities.decode(answerText)}
-      </Text>
+      <TouchableOpacity onPress={() => console.log("Pressed!")}>
+        <Text
+          testID={"answer-display"}
+          style={styles.text}
+          adjustsFontSizeToFit={true}
+        >
+          {entities.decode(answerText)}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

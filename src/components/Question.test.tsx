@@ -35,24 +35,24 @@ describe("Question component", () => {
     getByText(mockQuestionWithAnswers.incorrectAnswers[2]);
   });
 
-  it("correct answer position determined by output of Math.random() function", () => {
-    const { getAllByTestId, debug } = render(
+  it("renders answers in order determined by Math.random() function", () => {
+    const { getAllByTestId } = render(
       <Question question={mockQuestionWithAnswers} />
     );
 
     const renderedAnswers = getAllByTestId("answer-display");
 
-    const actualAnswerOrder = renderedAnswers.map(answer => {
-      return answer.props.children
-    })
+    const actualAnswerOrder = renderedAnswers.map((answer) => {
+      return answer.props.children;
+    });
 
     const expectedAnswerOrder = [
       mockQuestionWithAnswers.incorrectAnswers[0],
-      mockQuestionWithAnswers.incorrectAnswers[1], 
-      mockQuestionWithAnswers.correctAnswer, 
-      mockQuestionWithAnswers.incorrectAnswers[2]
-    ]
+      mockQuestionWithAnswers.incorrectAnswers[1],
+      mockQuestionWithAnswers.correctAnswer,
+      mockQuestionWithAnswers.incorrectAnswers[2],
+    ];
 
-    expect(expectedAnswerOrder).toStrictEqual(actualAnswerOrder)
+    expect(expectedAnswerOrder).toStrictEqual(actualAnswerOrder);
   });
 });
