@@ -15,10 +15,12 @@ const mockQuestionWithAnswers = {
 
 jest.spyOn(Math, "random").mockReturnValue(0.6);
 
+const handlePress = jest.fn();
+
 describe("Question component", () => {
   it("displays question", () => {
     const { getByText } = render(
-      <Question question={mockQuestionWithAnswers} />
+      <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
 
     getByText(mockQuestionWithAnswers.question);
@@ -26,7 +28,7 @@ describe("Question component", () => {
 
   it("displays all answers", () => {
     const { getByText } = render(
-      <Question question={mockQuestionWithAnswers} />
+      <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
 
     getByText(mockQuestionWithAnswers.correctAnswer);
@@ -37,7 +39,7 @@ describe("Question component", () => {
 
   it("renders answers in order determined by Math.random() function", () => {
     const { getAllByTestId } = render(
-      <Question question={mockQuestionWithAnswers} />
+      <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
 
     const renderedAnswers = getAllByTestId("answer-display");
