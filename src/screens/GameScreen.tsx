@@ -17,7 +17,7 @@ export interface QuestionWithAnswers {
 export const GameScreen = () => {
   const [questions, setQuestions] = useState<Array<QuestionWithAnswers>>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [score, setScore] = useState<number>(0);
+  const [currentScore, setCurrentScore] = useState<number>(0);
 
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=10&type=multiple`)
@@ -41,14 +41,40 @@ export const GameScreen = () => {
       });
   }, []);
 
-  const handlePress = (answer: string) => {
-    console.log(answer);
+  const handleAnswerPress = (answer: string) => {
+    const questionList = questions;
+    const currentQuestion = questions![currentQuestionIndex];
 
-    if (answer === questions![currentQuestionIndex].correctAnswer) {
-      console.log("CORRECT!");
-    } else {
-      console.log("INCORRECT!");
+    currentQuestion.answered = true;
+    currentQuestion.selectedAnswer = answer;
+
+    questionList!.splice(currentQuestionIndex, 1, currentQuestion);
+
+    setQuestions(questionList);
+  };
+
+  const handleNextPress = () => {
+    if (
+      questions![currentQuestionIndex].selectedAnswer ===
+      questions![currentQuestionIndex].correctAnswer
+    ) {
+      setCurrentScore(currentScore + 1);
     }
+
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
+  const handleFinishPress = () => {
+    let finalScore = currentScore;
+
+    if (
+      questions![currentQuestionIndex].selectedAnswer ===
+      questions![currentQuestionIndex].correctAnswer
+    ) {
+      finalScore += 1;
+    }
+
+    navigation.navigate("Score", { score: finalScore });
   };
 
   const navigation = useNavigation();
@@ -64,25 +90,23 @@ export const GameScreen = () => {
       <View style={styles.container}>
         {questions && (
           <>
-            <Text style={styles.text}>Question {currentQuestionIndex + 1}</Text>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>
+                Question {currentQuestionIndex + 1}
+              </Text>
+              <Text style={styles.headerText}>Score: {currentScore}</Text>
+            </View>
+
             <Question
               question={questions[currentQuestionIndex]}
-              handlePress={handlePress}
+              handlePress={handleAnswerPress}
             />
           </>
         )}
         {questions && currentQuestionIndex < questions.length - 1 ? (
-          <Button
-            buttonText="next"
-            onPress={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
-          />
+          <Button buttonText="next" onPress={handleNextPress} />
         ) : (
-          <Button
-            buttonText="finish"
-            onPress={() =>
-              navigation.navigate("Score", { correctAnswers: score })
-            }
-          />
+          <Button buttonText="finish" onPress={handleFinishPress} />
         )}
         <Button buttonText="quit" onPress={() => navigation.navigate("Home")} />
       </View>
@@ -94,12 +118,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffe6f4",
-    alignItems: "center",
     justifyContent: "center",
   },
-  text: {
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginLeft: 20,
-    alignSelf: "flex-start",
+    marginRight: 20,
+  },
+  headerText: {
     fontFamily: "FugazOne_400Regular",
     fontSize: 20,
   },

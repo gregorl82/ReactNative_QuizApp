@@ -6,7 +6,7 @@ import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";
 
 export const ScoreScreen = ({ route }: any) => {
-  const { correctAnswers } = route.params;
+  const { score } = route.params;
 
   const navigation = useNavigation();
 
@@ -17,7 +17,7 @@ export const ScoreScreen = ({ route }: any) => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Score: {correctAnswers}!</Text>
+        <Text style={styles.text}>Score: {score}!</Text>
         <Button
           buttonText="reset"
           onPress={() => navigation.navigate("Home")}
