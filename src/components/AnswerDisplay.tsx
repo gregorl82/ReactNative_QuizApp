@@ -12,7 +12,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({ answerText }) => {
 
   return (
     <View style={styles.answerDisplay}>
-      <Text style={styles.text} adjustsFontSizeToFit={true}>
+      <Text testID={"answer-display"} style={styles.text} adjustsFontSizeToFit={true}>
         {entities.decode(answerText)}
       </Text>
     </View>
