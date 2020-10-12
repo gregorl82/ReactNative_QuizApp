@@ -5,11 +5,12 @@ import { Question } from "../components/Question";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";
+import { insert } from "../utils/insert";
 
 export interface QuestionWithAnswers {
   question: string;
   correctAnswer: string;
-  incorrectAnswers: string[];
+  answers: string[];
   selectedAnswer: string | undefined;
   answered: boolean;
 }
@@ -30,7 +31,7 @@ export const GameScreen = () => {
             return {
               question: result.question,
               correctAnswer: result.correct_answer,
-              incorrectAnswers: result.incorrect_answers,
+              answers: insert(result.incorrect_answers, result.correct_answer),
               selectedAnswer: undefined,
               answered: false,
             } as QuestionWithAnswers;
@@ -42,39 +43,28 @@ export const GameScreen = () => {
   }, []);
 
   const handleAnswerPress = (answer: string) => {
-    const questionList = questions;
     const currentQuestion = questions![currentQuestionIndex];
 
-    currentQuestion.answered = true;
     currentQuestion.selectedAnswer = answer;
+    currentQuestion.answered = true;
 
-    questionList!.splice(currentQuestionIndex, 1, currentQuestion);
+    questions!.splice(currentQuestionIndex, 1, currentQuestion);
 
-    setQuestions(questionList);
+    setQuestions(questions);
+
+    if (currentQuestion.correctAnswer === answer) {
+      setCurrentScore(currentScore + 1);
+    } else {
+      setCurrentScore(currentScore);
+    }
   };
 
   const handleNextPress = () => {
-    if (
-      questions![currentQuestionIndex].selectedAnswer ===
-      questions![currentQuestionIndex].correctAnswer
-    ) {
-      setCurrentScore(currentScore + 1);
-    }
-
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
   const handleFinishPress = () => {
-    let finalScore = currentScore;
-
-    if (
-      questions![currentQuestionIndex].selectedAnswer ===
-      questions![currentQuestionIndex].correctAnswer
-    ) {
-      finalScore += 1;
-    }
-
-    navigation.navigate("Score", { score: finalScore });
+    navigation.navigate("Score", { score: currentScore });
   };
 
   const navigation = useNavigation();

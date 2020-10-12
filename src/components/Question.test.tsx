@@ -6,14 +6,13 @@ import { Question } from "./Question";
 const mockQuestionWithAnswers = {
   question: "Test question",
   correctAnswer: "Test correct answer",
-  incorrectAnswers: [
+  answers: [
+    "Test correct answer",
     "Test wrong answer 1",
     "Test wrong answer 2",
     "Test wrong answer 3",
   ],
 } as QuestionWithAnswers;
-
-jest.spyOn(Math, "random").mockReturnValue(0.6);
 
 const handlePress = jest.fn();
 
@@ -31,13 +30,13 @@ describe("Question component", () => {
       <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
 
-    getByText(mockQuestionWithAnswers.correctAnswer);
-    getByText(mockQuestionWithAnswers.incorrectAnswers[0]);
-    getByText(mockQuestionWithAnswers.incorrectAnswers[1]);
-    getByText(mockQuestionWithAnswers.incorrectAnswers[2]);
+    getByText(mockQuestionWithAnswers.answers[0]);
+    getByText(mockQuestionWithAnswers.answers[1]);
+    getByText(mockQuestionWithAnswers.answers[2]);
+    getByText(mockQuestionWithAnswers.answers[3]);
   });
 
-  it("renders answers in order determined by Math.random() function", () => {
+  it("renders answers in order", () => {
     const { getAllByTestId } = render(
       <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
@@ -49,10 +48,10 @@ describe("Question component", () => {
     });
 
     const expectedAnswerOrder = [
-      mockQuestionWithAnswers.incorrectAnswers[0],
-      mockQuestionWithAnswers.incorrectAnswers[1],
-      mockQuestionWithAnswers.correctAnswer,
-      mockQuestionWithAnswers.incorrectAnswers[2],
+      mockQuestionWithAnswers.answers[0],
+      mockQuestionWithAnswers.answers[1],
+      mockQuestionWithAnswers.answers[2],
+      mockQuestionWithAnswers.answers[3],
     ];
 
     expect(expectedAnswerOrder).toStrictEqual(actualAnswerOrder);
