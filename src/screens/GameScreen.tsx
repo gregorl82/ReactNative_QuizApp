@@ -18,6 +18,7 @@ export interface QuestionWithAnswers {
 export const GameScreen = () => {
   const [questions, setQuestions] = useState<Array<QuestionWithAnswers>>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [currentQuestion, setCurrentQuestion] = useState<QuestionWithAnswers>();
   const [currentScore, setCurrentScore] = useState<number>(0);
 
   useEffect(() => {
@@ -39,28 +40,31 @@ export const GameScreen = () => {
         );
 
         setQuestions(formattedQuestions);
+
+        setCurrentQuestion(formattedQuestions[0]);
       });
   }, []);
 
   const handleAnswerPress = (answer: string) => {
-    const currentQuestion = questions![currentQuestionIndex];
-
-    currentQuestion.selectedAnswer = answer;
-    currentQuestion.answered = true;
-
-    questions!.splice(currentQuestionIndex, 1, currentQuestion);
-
-    setQuestions(questions);
-
-    if (currentQuestion.correctAnswer === answer) {
+    if (currentQuestion!.correctAnswer === answer) {
       setCurrentScore(currentScore + 1);
     } else {
       setCurrentScore(currentScore);
     }
+
+    const updatedQuestion = {
+      ...currentQuestion!,
+      selectedAnswer: answer,
+      answered: true,
+    };
+
+    setCurrentQuestion(updatedQuestion);
   };
 
   const handleNextPress = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+
+    setCurrentQuestion(questions![currentQuestionIndex + 1]);
   };
 
   const handleFinishPress = () => {
@@ -78,7 +82,7 @@ export const GameScreen = () => {
   } else {
     return (
       <View style={styles.container}>
-        {questions && (
+        {currentQuestion && (
           <>
             <View style={styles.header}>
               <Text style={styles.headerText}>
@@ -93,7 +97,7 @@ export const GameScreen = () => {
             />
           </>
         )}
-        {questions && currentQuestionIndex < questions.length - 1 ? (
+        {currentQuestion && currentQuestionIndex < questions.length - 1 ? (
           <Button buttonText="next" onPress={handleNextPress} />
         ) : (
           <Button buttonText="finish" onPress={handleFinishPress} />
