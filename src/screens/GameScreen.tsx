@@ -97,7 +97,7 @@ export const GameScreen = () => {
             </View>
 
             <Question
-              question={questions[currentQuestionIndex]}
+              question={currentQuestion}
               handlePress={handleAnswerPress}
             />
           </>
