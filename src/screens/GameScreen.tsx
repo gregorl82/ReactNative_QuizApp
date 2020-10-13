@@ -19,6 +19,9 @@ export const GameScreen = () => {
   const [questions, setQuestions] = useState<Array<QuestionWithAnswers>>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<QuestionWithAnswers>();
+  const [answeredQuestions, setAnsweredQuestions] = useState<
+    Array<QuestionWithAnswers>
+  >([]);
   const [currentScore, setCurrentScore] = useState<number>(0);
 
   useEffect(() => {
@@ -46,12 +49,6 @@ export const GameScreen = () => {
   }, []);
 
   const handleAnswerPress = (answer: string) => {
-    if (currentQuestion!.correctAnswer === answer) {
-      setCurrentScore(currentScore + 1);
-    } else {
-      setCurrentScore(currentScore);
-    }
-
     const updatedQuestion = {
       ...currentQuestion!,
       selectedAnswer: answer,
@@ -59,9 +56,17 @@ export const GameScreen = () => {
     };
 
     setCurrentQuestion(updatedQuestion);
+
+    if (currentQuestion!.correctAnswer === answer) {
+      setCurrentScore(currentScore + 1);
+    } else {
+      setCurrentScore(currentScore);
+    }
   };
 
   const handleNextPress = () => {
+    setAnsweredQuestions([...answeredQuestions, currentQuestion!]);
+
     setCurrentQuestionIndex(currentQuestionIndex + 1);
 
     setCurrentQuestion(questions![currentQuestionIndex + 1]);
@@ -97,11 +102,13 @@ export const GameScreen = () => {
             />
           </>
         )}
-        {currentQuestion && currentQuestionIndex < questions.length - 1 ? (
-          <Button buttonText="next" onPress={handleNextPress} />
-        ) : (
-          <Button buttonText="finish" onPress={handleFinishPress} />
-        )}
+        {currentQuestion &&
+          currentQuestion.answered &&
+          (currentQuestionIndex < questions.length - 1 ? (
+            <Button buttonText="next" onPress={handleNextPress} />
+          ) : (
+            <Button buttonText="finish" onPress={handleFinishPress} />
+          ))}
         <Button buttonText="quit" onPress={() => navigation.navigate("Home")} />
       </View>
     );

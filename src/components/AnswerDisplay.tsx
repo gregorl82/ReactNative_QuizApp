@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { color } from "react-native-reanimated";
 
 const Entities = require("html-entities").AllHtmlEntities;
 
