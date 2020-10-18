@@ -119,11 +119,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffe6f4",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
   },

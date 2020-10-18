@@ -18,13 +18,15 @@ export const Button: React.FC<ButtonProps> = ({ buttonText, onPress }) => {
 
 const styles = StyleSheet.create({
   button: {
-    padding: 15,
+    padding: 10,
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
     backgroundColor: "#488687",
     color: "#fff",
     fontWeight: "bold",
     fontSize: 15,
     borderRadius: 5,
-    width: 100,
     textAlign: "center",
   },
 });
