@@ -151,11 +151,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   resultContainer: {
-    padding: 10,
+    paddingTop: 10,
     alignSelf: "center",
   },
   resultText: {
     fontFamily: "FugazOne_400Regular",
-    fontSize: 30,
+    fontSize: 28,
   },
 });

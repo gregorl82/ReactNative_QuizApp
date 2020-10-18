@@ -35,7 +35,6 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
 const styles = StyleSheet.create({
   answerDisplay: {
     height: 50,
-    width: 400,
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 10,

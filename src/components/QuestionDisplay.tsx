@@ -19,7 +19,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 const styles = StyleSheet.create({
   questionDisplay: {
     backgroundColor: "#fff",
-    height: 200,
+    height: 150,
     margin: 20,
     padding: 10,
     borderRadius: 10,
