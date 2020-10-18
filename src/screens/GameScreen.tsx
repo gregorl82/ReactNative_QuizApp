@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
-import { Button } from "../components/Button";
-import { Question } from "../components/Question";
+import { Button, Question } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";

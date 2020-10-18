@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { Button } from "../components/Button";
+import { Button } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 import { AppLoading } from "expo";

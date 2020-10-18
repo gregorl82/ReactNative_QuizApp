@@ -1,7 +1,7 @@
 import React from "react";
 import { AppLoading } from "expo";
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "../components/Button";
+import { Button } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
 
