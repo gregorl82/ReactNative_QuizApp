@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
-
-const Entities = require("html-entities").AllHtmlEntities;
+import { AllHtmlEntities } from "html-entities";
 
 export interface AnswerDisplayProps {
   answerText: string;
@@ -14,8 +13,6 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
   answered,
   handlePress,
 }) => {
-  const entities = new Entities();
-
   return (
     <View style={styles.answerDisplay}>
       <Pressable
@@ -28,7 +25,7 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
           style={styles.text}
           adjustsFontSizeToFit={true}
         >
-          {entities.decode(answerText)}
+          {AllHtmlEntities.decode(answerText)}
         </Text>
       </Pressable>
     </View>

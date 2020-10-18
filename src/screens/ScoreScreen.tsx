@@ -17,11 +17,10 @@ export const ScoreScreen = ({ route }: any) => {
   } else {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Score: {score}!</Text>
-        <Button
-          buttonText="reset"
-          onPress={() => navigation.navigate("Home")}
-        />
+        <Text style={styles.headerText}>You scored...</Text>
+        <Text style={styles.scoreText}>{score} out of 10!</Text>
+
+        <Button buttonText="home" onPress={() => navigation.navigate("Home")} />
       </View>
     );
   }
@@ -31,10 +30,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffe6f4",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
   },
-  text: {
+  headerText: {
     fontFamily: "FugazOne_400Regular",
+    textAlign: "center",
+    fontSize: 30,
+    marginTop: 200,
+  },
+  scoreText: {
+    fontFamily: "Roboto",
+    textAlign: "center",
+    fontStyle: "italic",
+    fontSize: 30,
+    marginTop: 20,
+    marginBottom: 30,
   },
 });

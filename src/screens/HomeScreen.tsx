@@ -1,6 +1,6 @@
 import React from "react";
 import { AppLoading } from "expo";
-import { StyleSheet, Text, View, Platform } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Button } from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts, FugazOne_400Regular } from "@expo-google-fonts/fugaz-one";
@@ -18,7 +18,7 @@ export const HomeScreen = () => {
         <Text style={styles.titleText}>Qwizzr!</Text>
 
         <Button
-          buttonText="start"
+          buttonText="start game"
           onPress={() => navigation.navigate("Game")}
         />
       </View>

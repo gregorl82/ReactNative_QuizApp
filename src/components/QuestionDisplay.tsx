@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-
-const Entities = require("html-entities").AllHtmlEntities;
+import { AllHtmlEntities } from "html-entities";
 
 export interface QuestionDisplayProps {
   questionText: string;
@@ -10,11 +9,9 @@ export interface QuestionDisplayProps {
 export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
   questionText,
 }) => {
-  const entities = new Entities();
-
   return (
     <View style={styles.questionDisplay}>
-      <Text style={styles.text}>{entities.decode(questionText)}</Text>
+      <Text style={styles.text}>{AllHtmlEntities.decode(questionText)}</Text>
     </View>
   );
 };
@@ -22,7 +19,7 @@ export const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 const styles = StyleSheet.create({
   questionDisplay: {
     backgroundColor: "#fff",
-    height: 250,
+    height: 200,
     margin: 20,
     padding: 10,
     borderRadius: 10,

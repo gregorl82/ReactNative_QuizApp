@@ -3,12 +3,17 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 
 interface ButtonProps {
   buttonText: string;
+  displayed?: boolean;
   onPress: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ buttonText, onPress }) => {
+export const Button: React.FC<ButtonProps> = ({
+  buttonText,
+  displayed,
+  onPress,
+}) => {
   return (
-    <View>
+    <View style={{ display: displayed ? "none" : "flex" }}>
       <Pressable onPress={onPress}>
         <Text style={styles.button}>{buttonText.toUpperCase()}</Text>
       </Pressable>

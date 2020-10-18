@@ -15,6 +15,11 @@ export interface QuestionWithAnswers {
   answered: boolean;
 }
 
+enum Result {
+  Correct = "Correct!",
+  Incorrect = "Incorrect!",
+}
+
 export const GameScreen = () => {
   const [questions, setQuestions] = useState<Array<QuestionWithAnswers>>();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -23,6 +28,7 @@ export const GameScreen = () => {
     Array<QuestionWithAnswers>
   >([]);
   const [currentScore, setCurrentScore] = useState<number>(0);
+  const [result, setResult] = useState<Result>();
 
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=10&type=multiple`)
@@ -59,12 +65,16 @@ export const GameScreen = () => {
 
     if (currentQuestion!.correctAnswer === answer) {
       setCurrentScore(currentScore + 1);
+      setResult(Result.Correct);
     } else {
       setCurrentScore(currentScore);
+      setResult(Result.Incorrect);
     }
   };
 
   const handleNextPress = () => {
+    setResult(undefined);
+
     setAnsweredQuestions([...answeredQuestions, currentQuestion!]);
 
     setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -102,14 +112,23 @@ export const GameScreen = () => {
             />
           </>
         )}
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultText}>{result}</Text>
+        </View>
         {currentQuestion &&
-          currentQuestion.answered &&
           (currentQuestionIndex < questions.length - 1 ? (
-            <Button buttonText="next" onPress={handleNextPress} />
+            <Button
+              buttonText="next question"
+              displayed={!currentQuestion.answered}
+              onPress={handleNextPress}
+            />
           ) : (
-            <Button buttonText="finish" onPress={handleFinishPress} />
+            <Button
+              buttonText="finish"
+              displayed={!currentQuestion.answered}
+              onPress={handleFinishPress}
+            />
           ))}
-        <Button buttonText="quit" onPress={() => navigation.navigate("Home")} />
       </View>
     );
   }
@@ -131,5 +150,13 @@ const styles = StyleSheet.create({
   headerText: {
     fontFamily: "FugazOne_400Regular",
     fontSize: 20,
+  },
+  resultContainer: {
+    padding: 10,
+    alignSelf: "center",
+  },
+  resultText: {
+    fontFamily: "FugazOne_400Regular",
+    fontSize: 30,
   },
 });
