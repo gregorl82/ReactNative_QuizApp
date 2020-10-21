@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import { AnswerDisplay } from "./AnswerDisplay";
+import { AnswerDisplay } from "../AnswerDisplay";
 
 const handlePress = jest.fn();
 

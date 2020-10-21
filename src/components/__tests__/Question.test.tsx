@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
-import { QuestionWithAnswers } from "../screens/GameScreen";
-import { Question } from "./Question";
+import { QuestionWithAnswers } from "../../screens/GameScreen";
+import { Question } from "../Question";
 
 const mockQuestionWithAnswers = {
   question: "Test question",
