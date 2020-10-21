@@ -41,7 +41,7 @@ describe("Question component", () => {
       <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );
 
-    const renderedAnswers = getAllByTestId("answer-display");
+    const renderedAnswers = getAllByTestId("answer-display-text");
 
     const actualAnswerOrder = renderedAnswers.map((answer) => {
       return answer.props.children;
