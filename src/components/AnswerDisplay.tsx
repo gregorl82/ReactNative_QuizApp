@@ -16,12 +16,13 @@ export const AnswerDisplay: React.FC<AnswerDisplayProps> = ({
   return (
     <View style={styles.answerDisplay}>
       <Pressable
+        testID={"answer-display"}
         onPress={() => handlePress(answerText)}
         android_ripple={{ color: "f5d0dc", radius: 300 }}
         disabled={answered}
       >
         <Text
-          testID={"answer-display"}
+          testID={"answer-display-text"}
           style={styles.text}
           adjustsFontSizeToFit={true}
         >

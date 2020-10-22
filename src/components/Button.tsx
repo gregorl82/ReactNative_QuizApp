@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   onPress,
 }) => {
   return (
-    <View style={{ display: displayed ? "none" : "flex" }}>
+    <View testID="button" style={{ display: displayed ? "none" : "flex" }}>
       <Pressable onPress={onPress}>
         <Text style={styles.button}>{buttonText.toUpperCase()}</Text>
       </Pressable>
