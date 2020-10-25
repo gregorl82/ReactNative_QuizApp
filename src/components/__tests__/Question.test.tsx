@@ -17,7 +17,7 @@ const mockQuestionWithAnswers = {
 const handlePress = jest.fn();
 
 describe("Question component", () => {
-  it("displays question", () => {
+  it("renders correctly with the displayed question", () => {
     const { getByText } = render(
       <Question question={mockQuestionWithAnswers} handlePress={handlePress} />
     );

@@ -5,7 +5,7 @@ import { AnswerDisplay } from "../AnswerDisplay";
 const handlePress = jest.fn();
 
 describe("AnswerDisplay component", () => {
-  it("displays the passed in text", () => {
+  it("renders correctly with the passed in text", () => {
     const { getByText } = render(
       <AnswerDisplay
         answerText={"Test answer"}
